@@ -321,3 +321,102 @@ let world = &s[6..11];
 
 // 'hello' and 'world' reference a portion of the String
 ```
+
+### Chapter 5 - Using Structs to Structure Related Data
+
+- struct: custom data types for grouping together multiple related values
+
+  5.1 Defining and Instantiating Structs
+
+```rust
+struct User {
+	username: String,
+	email: String,
+	sign_in_count: u64,
+	active: bool.
+}
+
+let mut user1 = User {
+	email: String::from("someone@example.com"),
+	username: String::from("someusername123"),
+	active: true,
+	sign_in_count: 1,
+}
+
+user1.email // "someone@example.com"
+user1.email = String::from("another@example.com");
+user1.email // "another@example.com"
+```
+
+- tuple structs: have the added meaning the struct name provides, but don't have names associated with their fields; rather they have the types of the fields
+
+```rust
+// tuple struct example
+struct Color(i32, i32, i32);
+let black = Color(0, 0, 0);
+```
+
+- unit-like structs: structs that don't have any fields
+- `String` = owned type; `&str` = reference
+
+  5.2 An Example Program Using Structs
+
+- `#[derive(Debug)]` allows to print out debugging information for struct
+
+  5.3 Method Syntax
+
+- defined within the context of a struct/enum/trait object
+- first parameter is `self` (represents the instance of the struct the method is being called on)
+
+```rust
+#[derive(Debug)]
+struct Rectangle {
+	width: u32,
+	height: u32,
+}
+
+impl Rectangle {
+	fn area(&self) -> u32 {
+		self.width * self.height
+	}
+}
+
+fn main() {
+	let rect1 = Rectangle {
+		width: 30,
+		height: 50,
+	};
+
+	println!(
+		"The area of the rectangle is {} square pixels.",
+		rect1.area()
+	);
+}
+```
+
+- methods can take ownership of `self`, borrow `self` immutably, or borrow `self` mutably
+- benefit of using methods over functions: organization
+- immutable borrow: when you just need to read from struct and maintain ownership of the original struct, so it can be used again after calling a method
+- mutable borrow: when you want to write to struct
+- associated functions: functions within `impl` blocks that don't take `self` as a parameter
+  - they're still _associated_ with the struct
+  - not methods because they don't have an instance of the struct to work with
+  - often used for constructors that will return a new instance of the struct
+
+```rust
+impl Rectangle {
+// associated function
+	fn square(size: u32) -> Rectangle {
+		Rectangle {
+			width: size,
+			height: size
+		}
+	}
+}
+
+
+let sq = Rectangle::square(3);
+```
+
+- a struct can have multiple `impl` blocks
+- associated functions let you namespace functionality that is particular to your struct without having an instance available
