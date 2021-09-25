@@ -1,7 +1,5 @@
 # Rust 101
 
-## About
-
 This repo contains notes from my learnings about the Rust programming language. Contains:
 
 - notes from
