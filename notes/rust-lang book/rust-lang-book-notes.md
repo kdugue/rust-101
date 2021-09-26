@@ -141,6 +141,7 @@ fn main() {
 ### Chapter 4 - Understanding Ownership
 
 - ownership enables Rust to make memory safety guarantees without needing a garbage collector
+- Rust gives you control over your memory usage in the same way as other systems programming languages, but having the owner of data automatically clean up that data when the owner goes out of scope means you don’t have to write and debug extra code to get this control.
 
   4.1 What is Ownership?
 
@@ -420,3 +421,102 @@ let sq = Rectangle::square(3);
 
 - a struct can have multiple `impl` blocks
 - associated functions let you namespace functionality that is particular to your struct without having an instance available
+  - not tied to an instance of a struct
+  - do not have a `self` argument
+- define methods on structs via `impl`
+
+### Chapter 6 - Enums and Pattern Matching
+
+- enums: allow defining a type by enumerating all possible variants
+
+  6.1 Defining an Enum
+
+- can use `impl` to define methods on enums
+
+```rust
+enum Message {
+	Quit,
+	Move {x: i32, y: i32},
+	Write(String),
+	ChangeColor(i32, i32, i32),
+}
+
+impl Message {
+	fn call(&self) {
+		// method body would be defined here
+	}
+}
+
+let m = Message::Write(String::from("hello"));
+m.call();
+```
+
+- `Option`: enum that state whether a value is present or absent
+
+```rust
+enum Option<T> {
+	None,
+	Some(T),
+}
+
+fn checked_division(dividend: i32, divisor: i32) -> Option<i32> {
+    if divisor == 0 {
+        // Failure is represented as the `None` variant
+        None
+    } else {
+        // Result is wrapped in a `Some` variant
+        Some(dividend / divisor)
+    }
+}
+```
+
+- everywhere that a value has a type that isn't an `Option<T>`, you can assume that the value isn't null
+
+  6.2 The `match` Control Flow Operator
+
+- `match`: compare a value against a series of patterns and then execute code based on which pattern matches
+
+```rust
+enum Coin {
+	Penny,
+	Nickel,
+	Dime,
+	Quarter,
+}
+
+fn value_in_cents(coin: Coin) -> u8 {
+	match coin {
+		Coin::Penny => 1,
+		Coin::Nickel => 5,
+		Coin::Dime => 10,
+		Coin::Quarter => 25
+	}
+}
+```
+
+- matches are _exhaustive_: we must exhaust every last possibility in order for the code to be valid
+- `_` pattern will match any value
+- `()` is unit value; nothing happens
+
+```rust
+let some_u8_value = 0u8;
+match some_u8_value {
+	1 => println!("one"),
+	3 => println!("three"),
+	5 => println!("five"),
+	7 => println!("seven"),
+	_ => (),
+}
+```
+
+6.3 Concise Control Flow with `if let`
+
+- `if let`: `match` that runs code when the value matches one pattern and then ignores all other values
+
+```rust
+let some_u8_value = Some(0u8);
+if let Some(3) = some_u8_value {
+	println!("three");
+}
+
+```
