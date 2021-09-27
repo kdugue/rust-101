@@ -518,5 +518,91 @@ let some_u8_value = Some(0u8);
 if let Some(3) = some_u8_value {
 	println!("three");
 }
+```
+
+### Chapter 7 - Managing Growing Projects with Packages, Crates, and Modules
+
+- package can contain multiple binary crates and optionally one library crate
+- rust's module system: - packages: build, test, and share crates - crates: modules that produces a library or executable - modules and `use`:control organization, scope, and privacy of paths - paths: a way of naming an item
+
+**7.1 Packages and Crates**
+
+- crate: binary or library
+- package: one or more crates that provides a set of functionality
+  - contains a `Cargo.toml` file that describes how to build those crates
+  - can contain at most one library crate
+  - can contain as many binary crates as you'd like
+- package that only contains `src/main.rs`: only contains binary crate
+- package that contains both `src/main.rs` and `src/lib.rs` has 2 crates: (1) library crate, and (2) binary crate
+- crate's functionality is namespaced in its own scope; compiler does not get confused about which trait/struct belongs to which crate
+
+**7.2 Defining Modules to Control Scope and Privacy**
+
+- modules
+  - organize code within a crate into groups for readability and reuse
+  - control _privacy_ of items (`public` vs `private`)
+  - group related definitions together and name why they're related
+- module A contained inside module B also means:
+  - module A is the child of module B
+  - module B is the parent of module A
+
+```rust
+// module example
+mod front_of_house {
+	mod hosting {
+		fn add_to_waitlist() {}
+		fn seat_at_table() {}
+	}
+
+	mod serving {
+		fn take_order() {}
+		fn serve_order() {}
+		fn take_payment() {}
+	}
+}
 
 ```
+
+**7.3 Paths for Referring to an Item in the Module tree**
+
+- path has 2 forms:
+  1.  absolute path: using crate root via crate name, or a literal `crate`
+  2.  relative path: starts from current module; uses `self`, `super`, or an identifier in the current module
+- modules define Rust's privacy boundary
+- functions, methods, structs, enums, modules, and constants are private by default
+  - module system hides inner implementation details by default
+- `pub` (public): exposes inner parts of child modules' code to outer ancestor modules
+- making a module public doesn't make its contents public; `pub` on module only lets code in its ancestor modules refer to it
+- by default, enum variants are public; once enum is set to `pub`, all of its variants are public (you don't have to annotate each variant)
+
+```rust
+pub enum Appetizer {
+	Soup,
+	Salad
+}
+
+// Soup is public
+// Salad is public
+
+```
+
+- by default, structs and its fields are private, you have to
+
+```rust
+pub struct Breakfast {
+	pub toast: String,
+	seasonal_fruit: String
+}
+
+// toast is public
+// seasonal_fruit is private
+```
+
+**7.4 Bringing Paths into Scope with the `use` Keyword**
+
+- `use` : import other crates and use their functionality
+- ex-exporting: bringing an item into scope but also making the item available for others to bring into their scope
+- standard library (`std`) ships with Rust language
+- `*` glob operator: - `use std::collections::*;` : brings all public items defined in `std::collections` into the current scope
+
+**7.5 Separating Modules into Different Files**
