@@ -660,4 +660,46 @@ for i in &mut v {
 
 **8.2 Storing UTF-8 Encoded Text with Strings**
 
+- `String` vs `str`
+  - `String`:
+    - available in the standard library
+    - growable, mutable, owned type
+  - `str` (string slice)
+    - available in the core language
+    - string literals
+- both `String` and `str` are UTF-8 encoded
+- `to_string()` and `String::from()` are equivalent
+- strings do not support indexing
+
+```rust
+// creating empty str
+let myStr = String::new();
+
+// create string from string literal
+let data = "hello";
+let converted_data = data.to_string();
+
+let data = "hello";
+let converted_data = String::from(data);
+
+// appending to string
+
+// iterating over string
+for c in "hello".chars() {
+	println!("{}", c);
+}
+// will print: h e l l o
+```
+
+```rust
+let s1 = String::from("tic");
+let s2 = String::from("tac");
+let s3 = String::from("toe");
+
+let s = format!("{}-{}-{}", s1, s2, s3);
+// format is another way to format a string
+// format! macro returns a 'String' with its contents
+
+```
+
 **8.3 Storing Keys with Associated Values in Hash Maps**
