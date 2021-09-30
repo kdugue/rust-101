@@ -740,8 +740,49 @@ scores.entry(String::from("Blue")).or_insert(20)
 
 ### Chapter 9 - Error Handling
 
-- **9.1 Unrecoverable Errors with panic!**
+- Rust requires acknowledgement of handling of a possible error before your code will compile
+- 2 categories of errors:
+  1.  recoverable
+      - ex: file not found error
+  2.  unrecoverable
+      - symptoms of bugs
+      - ex: trying to access a location beyond the end of an array
+- Rust doesn't have exceptions
+  - recoverable errors: `Result<T, E>`
+  - unrecoverable errors: `panic!`
+
+**9.1 Unrecoverable Errors with panic!**
+
+- backtrace: list of functions that have been called to get to point of error
 
 **9.2 Recoverable Errors with Result**
+
+- `Result` enum has two variants: `Ok` and `Err`
+
+```rust
+enum Result<T, E> {
+	Ok(T),
+	Err(E),
+}
+```
+
+- propagating error: return error to the calling code
+- don't need to use `return` if it's the last expression in the function
+- error values that have the `?` operator called on them go through the `from` function, which is used to convert errors from one type into another
+- when the `?` operator calls the `from` function, the error type received is converted into the error type defined in the return type of the current function
+
+```rust
+use std::fs::File;
+use std::io;
+use std::io::Read;
+
+fn read_username_from_file() -> Result<String, io::Error> {
+	let mut s = String::new();
+
+	File::open("hello.txt")?.read_to_string(&mut s)?;
+
+	Ok(s);
+}
+```
 
 **9.3 To panic! or Not To panic!**
