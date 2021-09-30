@@ -81,6 +81,7 @@ let x = x * 2;
 
 - rust has 4 primary scalar types:
   1.  integers
+      - `i32` is default integer type
   2.  floating-point numbers
   3.  Booleans
   4.  characters
@@ -92,6 +93,7 @@ let x = x * 2;
 
 ```rust
 let tup: (i32, f64, u8) = (500, 6.4, 1);
+// i32 is default integer type
 ```
 
 2. **arrays**: elements must be of the same type
@@ -523,7 +525,11 @@ if let Some(3) = some_u8_value {
 ### Chapter 7 - Managing Growing Projects with Packages, Crates, and Modules
 
 - package can contain multiple binary crates and optionally one library crate
-- rust's module system: - packages: build, test, and share crates - crates: modules that produces a library or executable - modules and `use`:control organization, scope, and privacy of paths - paths: a way of naming an item
+- rust's module system:
+  - packages: build, test, and share crates
+  - crates: modules that produces a library or executable
+  - modules and `use`:control organization, scope, and privacy of paths
+  - paths: a way of naming an item
 
 **7.1 Packages and Crates**
 
@@ -603,6 +609,55 @@ pub struct Breakfast {
 - `use` : import other crates and use their functionality
 - ex-exporting: bringing an item into scope but also making the item available for others to bring into their scope
 - standard library (`std`) ships with Rust language
-- `*` glob operator: - `use std::collections::*;` : brings all public items defined in `std::collections` into the current scope
+- `*` glob operator:
+  - `use std::collections::*;` : brings all public items defined in `std::collections` into the current scope
 
 **7.5 Separating Modules into Different Files**
+
+### Chapter 8 - Common Collections
+
+- _collections_: standard library for data structures
+- data in _collections_ is stored on the heap, data can grow or shrink (as opposed to having the data stored on a stack)
+- common collections:
+  - vectors: store a variable number of values in ordered fashion
+  - strings: collection of characters
+  - hash map: key-value pairs
+
+**8.1 Storing Lists of Values with Vectors**
+vectors: - known as `Vec<T>`; `<T>` indicates that any type can be stored - can only store values of the same type - indexed, starting with 0
+
+```rust
+// create vector of i32 type
+let v: Vec<i32> = Vec::new();
+
+// initialize vector
+let mut v = vec![1, 2, 3];
+
+// interacting with vector
+v.push(4);
+v.push(5);
+
+// accessing values: index approach
+let thirdElement =: &i32 = &v[2];
+
+// accessing values: get method
+let thirdElement = v.get(2);
+
+// iterating over immutable vector
+let nums = vec![100, 200, 300];
+for i in &v {
+	println!("num is {}", i);
+}
+
+// iterating over mutable vector
+let mut v = vec![50, 100, 150];
+for i in &mut v {
+	*i += 50;
+	// *(dereference operator) because we are chaning the value that
+	// the mutable reference refers to
+}
+```
+
+**8.2 Storing UTF-8 Encoded Text with Strings**
+
+**8.3 Storing Keys with Associated Values in Hash Maps**
