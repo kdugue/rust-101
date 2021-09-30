@@ -703,3 +703,45 @@ let s = format!("{}-{}-{}", s1, s2, s3);
 ```
 
 **8.3 Storing Keys with Associated Values in Hash Maps**
+
+- represented as `HashMap<K, V>`
+- store data on heap (similar to vectors)
+- all keys must be on the same type; all values must be of the same type
+- `insert` moves values into the hash map; values are now owned by the hash map
+- inserting references to values in a hash map won't move the values
+- values that references point to must be valid for at least as long as the hash map is valid
+
+```rust
+use std::collections::HashMap;
+
+let mut scores = HashMap::new();
+scores.insert(String::from("Blue"), 10);
+scores.insert(String::from("Yellow"), 50)
+
+// retrieval
+let team_name = String::from("Blue");
+let score = scores.get(&team_name);
+
+// iterating over map
+for (key, value) in &scores {
+	println!("{}: {}", key, value);
+}
+
+// above loop will print
+// Yellow: 50
+// Blue: 10
+
+// conditionally inserting
+scores.entry(String::from("Red")).or_insert(25) // inserts
+
+// will not insert since 'Blue' already exists in hashmap
+scores.entry(String::from("Blue")).or_insert(20)
+```
+
+### Chapter 9 - Error Handling
+
+- **9.1 Unrecoverable Errors with panic!**
+
+**9.2 Recoverable Errors with Result**
+
+**9.3 To panic! or Not To panic!**
