@@ -48,7 +48,7 @@ fn abbrev_name(name: &str) -> String {
     let mut names = name.split(" ");
 
     //.next() will grab next value in iterator
-    // unwrap returns the value itse;f
+    // unwrap returns the value
     let first = names.next().unwrap();
     let second = names.next().unwrap();
 
