@@ -786,3 +786,15 @@ fn read_username_from_file() -> Result<String, io::Error> {
 ```
 
 **9.3 To panic! or Not To panic!**
+
+- better to return `Result` when defining a function that might fail
+- `panic!`: signals that program is in a state it can't handle and lets you tell the process to stop instead of trying to proceed with invalid or incorrect values
+-
+
+### Chapter 10 - Generic Types, Traits, and Lifetimes
+
+- **10.1 Generic Data Types**
+
+  **10.2 Traits: Defining Shared Behavior**
+
+  **10.3 Validating References with Lifetimes**
