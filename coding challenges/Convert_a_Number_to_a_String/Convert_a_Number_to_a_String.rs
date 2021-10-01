@@ -1,6 +1,6 @@
 fn number_to_string(i: i32) -> String {
     let numString = i.to_string();
-    numString // no semi color because this is what is being returned
+    numString // no semi colon because this is what is being returned
 }
 
 // alternative solution
