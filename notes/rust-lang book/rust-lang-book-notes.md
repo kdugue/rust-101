@@ -793,8 +793,38 @@ fn read_username_from_file() -> Result<String, io::Error> {
 
 ### Chapter 10 - Generic Types, Traits, and Lifetimes
 
-- **10.1 Generic Data Types**
+- generics: abstract stand-in for concrete types or other properties
 
-  **10.2 Traits: Defining Shared Behavior**
+**10.1 Generic Data Types**
 
-  **10.3 Validating References with Lifetimes**
+- `T` = type
+
+```rust
+fn largest<T>(list: &[T]) -> {
+	let mut largest = list[0];
+
+	for &item in list {
+		if item > largest {
+			largest = item;
+		}
+	}
+
+	largest
+}
+
+fn main() {
+	let number_list = vec![34, 50, 25, 100, 65];
+	let char_list = vec!['y', 'm', 'a', 'q']
+
+	largest(&number_list);
+	largest(&char_list);
+}
+
+```
+
+- using generics costs the same as using concrete types
+  - monomorphization: converting generic code into specific code by filling in the concrete types that are used when compiled
+
+**10.2 Traits: Defining Shared Behavior**
+
+**10.3 Validating References with Lifetimes**
