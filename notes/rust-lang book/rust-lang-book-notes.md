@@ -827,4 +827,99 @@ fn main() {
 
 **10.2 Traits: Defining Shared Behavior**
 
+- trait: tells Rust compiler about functionality a particular type has and can share with other types; can define shared behavior in an abstract way
+
+```rust
+pub trait Summary {
+	fn summarize(&self) -> String;
+}
+
+pub struct NewsArticle {
+	pub headline: String,
+	pub location: String,
+	pub author: String,
+	pub content: String,
+}
+
+impl Summary for NewsArticle {
+	fn summarize(&self) -> String {
+		format!("{}, by {} ({})", self.headline, self.author, self.location)
+	}
+}
+
+pub struct Tweet {
+	pub username; String,
+	pub content: String,
+	pub reply: bool,
+	pub retweet: bool,
+}
+
+impl Summary for Tweet {
+	fn summarize(&self) -> String {
+		format!("{}: {}", self.username, self.content)
+	}
+}
+```
+
+- traits and trait bounds let us write code that uses generic type parameters to reduce duplication but also specify to the compiler that we want the generic type to have particular behavior
+
 **10.3 Validating References with Lifetimes**
+
+- lifetime: scope for which things are valid
+- every reference in Rust has a lifetime
+- most lifetimes are inferred; only need to be annotated when the lifetimes of references could be related in a few different ways
+- dangling references: referencing data other than the data it's intended to reference
+- borrow checker: compares scopes to determine whether all borrows are valid
+- lifetime annotations
+  - describe the relationships of the lifetimes of multiple references to each other without affecting the lifetimes
+  - start with `'`
+  - annotations go in the function signature, not in the function body
+- lifetime syntax is about connecting the lifetimes of various parameters and return values of functions. once they're connect, rust has enough information to allow memory-safe operations and disallow operations that would create dangling points or otherwise violate memory safety
+
+```rust
+&i32			// a reference
+&'a i32			// a reference with an explicit lifetime
+&'a mut i32		// a mutable reference with an explicit lifetime
+```
+
+```rust
+fn main() {
+	let string1 = String::from("longest string is long");
+
+	{
+		let string2 = String::from("xyz");
+		let result = longest(string1.as_str(), string2.as_str());
+		println!("The longest string is {}", result);
+	}
+}
+
+}
+
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+	if x.len() > y.len() {
+		x
+	} else {
+		y
+	}
+
+}
+```
+
+- lifetime ellision rules
+  - patterns programmed into Rust's analysis of references
+  - set of particular cases that the compiler will consider, and if your code fits these cases, you don't need to write the lifetimes explicitly
+  - input lifetimes: lifetimes on function or method parameters
+  - output lifetimes: lifetimes on return values
+- compiler has 3 rules for figuring out what lifetimes references have when there aren't explicit annotations
+  1.  each parameter that is a reference gets its own lifetime parameter
+  2.  there is exactly one input lifetime parameter
+  3.  if there are multiple input lifetime parameters, but one of them is `&self` or `&mut self`, the life time of `sef` is assigned to all output lifetime parameters
+- lifetime of all string literals is `'static`
+
+### Chapter 11 - Writing Automated Tests
+
+- **11.1 How to Write Tests**
+
+**11.2 Controlling How Tests Are Run**
+
+**11.3 Test Organization**
