@@ -828,6 +828,7 @@ fn main() {
 **10.2 Traits: Defining Shared Behavior**
 
 - trait: tells Rust compiler about functionality a particular type has and can share with other types; can define shared behavior in an abstract way
+  - allow us to define a set of methods that are shared across different types
 
 ```rust
 pub trait Summary {
@@ -870,6 +871,8 @@ impl Summary for Tweet {
 - most lifetimes are inferred; only need to be annotated when the lifetimes of references could be related in a few different ways
 - dangling references: referencing data other than the data it's intended to reference
 - borrow checker: compares scopes to determine whether all borrows are valid
+  - runs at compile time, and checks to make sure that all borrowed values or references are valid
+- lifetime of a variable: refers to how long the variable lives for
 - lifetime annotations
   - describe the relationships of the lifetimes of multiple references to each other without affecting the lifetimes
   - start with `'`
@@ -915,6 +918,8 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
   2.  there is exactly one input lifetime parameter
   3.  if there are multiple input lifetime parameters, but one of them is `&self` or `&mut self`, the life time of `sef` is assigned to all output lifetime parameters
 - lifetime of all string literals is `'static`
+- `'static` lifetime: reference can live as long as the duration of the program
+  - all string literals have a static lifetime because they are stored in program's binary
 
 ### Chapter 11 - Writing Automated Tests
 
