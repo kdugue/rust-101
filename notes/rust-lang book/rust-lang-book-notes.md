@@ -923,8 +923,45 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ### Chapter 11 - Writing Automated Tests
 
-- **11.1 How to Write Tests**
+- test in Rust: function annotated with `test` attribute
+- attribute: metadata about pieces of Rust code
+- test macros
+  - `assert!`: when you want to ensure that some condition in a test evaluates to `true`
+
+**11.1 How to Write Tests**
 
 **11.2 Controlling How Tests Are Run**
 
+- `cargo test` command: compiles code in test mode and runs the resulting test binary
+  - default behavior: run all tests in parallel (using threads)
+- `cargo test -- --test=threads=1`: set the number of tests threads to 1; tests won't interfere with each other if they share state
+- `cargo test {name_of_test}`: run a single test
+
+```rust
+// to ignore a test
+
+#[test]
+#[ignore]
+fn expensive_test() {
+	// code that takes an hour to run
+}
+```
+
+`cargo test -- --ignored`: will run the ignored tests
+
 **11.3 Test Organization**
+
+- 2 main categories of tests:
+  1.  unit tests
+      - small and more focused, testing one module in isolation at a time
+      - test private interfaces
+  2.  integration tests:
+      - entirely external to your library
+      - uses only public interface and potentially exercising multiple modules per test
+- `#[cfg(test)]`: runs test only when when `cargo test` is invoked; tests do not run when `cargo build` is invoked
+  - cfg stands for "configuration"
+- able to test private functions
+- child modules can use the items in their ancestor modules
+- `user super::*;`: brings all of the module's parent's items into scope
+- only library crates expose functions that other crates can use; binary create sare meant to be run on their own
+- if a project is a binary crate that only contains a _src/main.rs_ file and doesn't have a _src/lib.rs_ file, we can't create integration tests in the _tests_ directory and bring functions defined in the _src/main.rs_ file into scope with a `use` statement
