@@ -57,7 +57,7 @@ let  guess: u32 = guess.trim().parse().expect("Please type a number!");
 
 ### Chapter 3 - Common Programming Concepts
 
-3.1 Variables and Mutability
+**3.1 Variables and Mutability**
 
 - variables are immutable (can't change value) by default
 - compiler guarantees that when you state a value wont change, it really won't change
@@ -73,7 +73,7 @@ let x = x * 2;
 // transformations have been completed
 ```
 
-3.2 Data Types
+**3.2 Data Types**
 
 - rust is statically typed: it must know the types of all variables at compile time
 
@@ -100,7 +100,7 @@ let tup: (i32, f64, u8) = (500, 6.4, 1);
    - fixed length
    - useful for when you want your data allocated on the stack rather than the heap
 
-3.3 Functions
+**3.3 Functions**
 
 - location of function definitions are don't matter
 - function parameters must have a type declared
@@ -119,9 +119,9 @@ fn five() -> i32 {
 }
 ```
 
-3.4 Comments
+**3.4 Comments**
 
-3.5 Control Flow
+**3.5 Control Flow**
 
 - arms: blocks of code associated with the conditions in `if` expressions
 - rust doesn't automatically convert non-Boolean types to a Boolean
@@ -145,7 +145,7 @@ fn main() {
 - ownership enables Rust to make memory safety guarantees without needing a garbage collector
 - Rust gives you control over your memory usage in the same way as other systems programming languages, but having the owner of data automatically clean up that data when the owner goes out of scope means you don’t have to write and debug extra code to get this control.
 
-  4.1 What is Ownership?
+**4.1 What is Ownership?**
 
 - memory is managed through a system of ownership with a set of tules that the compiler checks at compile time
 - data with an unknown size at compile time or a size that might change must be stored on the heap instead (will not be stored on the stack)
@@ -242,7 +242,7 @@ fn  makes_copy(some_integer: i32) {// some_integer comes into scope
 
 - returning values can also transfer ownership; assigning a value to another variable moves it
 - when a variable that includes data on the heap goes out of scope, the value will be cleaned up by `drop` unless the data has been moved to be owned by another variable
-- 4.2 References and Borrowing
+- **4.2 References and Borrowing**
 
 - `&` = references, allow you to refer to some value without taking ownership of it
 - rules of references - at any given time, you can have _either_ one mutable reference _or_ any number of immutable references - references must always be valid
@@ -310,7 +310,7 @@ println!("{}, {}", r1, r2);
 // error[E0499]: cannot borrow `s` as mutable more than once at a time
 ```
 
-4.3 The Slice Type
+**4.3 The Slice Type**
 Slice
 
 - does not have ownership
@@ -329,7 +329,7 @@ let world = &s[6..11];
 
 - struct: custom data types for grouping together multiple related values
 
-  5.1 Defining and Instantiating Structs
+**5.1 Defining and Instantiating Structs**
 
 ```rust
 struct User {
@@ -362,11 +362,11 @@ let black = Color(0, 0, 0);
 - unit-like structs: structs that don't have any fields
 - `String` = owned type; `&str` = reference
 
-  5.2 An Example Program Using Structs
+**5.2 An Example Program Using Structs**
 
 - `#[derive(Debug)]` allows to print out debugging information for struct
 
-  5.3 Method Syntax
+**5.3 Method Syntax**
 
 - defined within the context of a struct/enum/trait object
 - first parameter is `self` (represents the instance of the struct the method is being called on)
@@ -431,7 +431,7 @@ let sq = Rectangle::square(3);
 
 - enums: allow defining a type by enumerating all possible variants
 
-  6.1 Defining an Enum
+**6.1 Defining an Enum**
 
 - can use `impl` to define methods on enums
 
@@ -474,7 +474,7 @@ fn checked_division(dividend: i32, divisor: i32) -> Option<i32> {
 
 - everywhere that a value has a type that isn't an `Option<T>`, you can assume that the value isn't null
 
-  6.2 The `match` Control Flow Operator
+**6.2 The `match` Control Flow Operator**
 
 - `match`: compare a value against a series of patterns and then execute code based on which pattern matches
 
@@ -511,7 +511,7 @@ match some_u8_value {
 }
 ```
 
-6.3 Concise Control Flow with `if let`
+**6.3 Concise Control Flow with `if let`**
 
 - `if let`: `match` that runs code when the value matches one pattern and then ignores all other values
 
@@ -965,3 +965,17 @@ fn expensive_test() {
 - `user super::*;`: brings all of the module's parent's items into scope
 - only library crates expose functions that other crates can use; binary create sare meant to be run on their own
 - if a project is a binary crate that only contains a _src/main.rs_ file and doesn't have a _src/lib.rs_ file, we can't create integration tests in the _tests_ directory and bring functions defined in the _src/main.rs_ file into scope with a `use` statement
+
+### Chapter 12 - An I/O Project: Building a C
+
+- **12.1 Accepting Command Line Arguments**
+
+  **12.2 Reading a File**
+
+  **12.3 Refactoring to Improve Modularity and Error Handling**
+
+  **12.4 Developing the Library's Functionality with Test Driven Development**
+
+  **12.5 Working with Environment Variables**
+
+  **12.6 Writing Error Messages to Standard Error Instead of Standard Output**
