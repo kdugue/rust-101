@@ -968,14 +968,27 @@ fn expensive_test() {
 
 ### Chapter 12 - An I/O Project: Building a C
 
-- **12.1 Accepting Command Line Arguments**
+**12.1 Accepting Command Line Arguments**
 
-  **12.2 Reading a File**
+- iterators produce a series of values,
+  - `collect`: turns iterator into a collection that contains all elements
+    - needs to have annotation because Rust isn't able to infer collection type
+- **12.2 Reading a File**
 
   **12.3 Refactoring to Improve Modularity and Error Handling**
 
-  **12.4 Developing the Library's Functionality with Test Driven Development**
+- primitive obsession: anti pattern where using primitive values when a complex type would be more appropriate
+- `unwrap_or_else`: allows to define some custom, non-`panic!` error handling.
+- `()`: unit type; returns nothing
+  - when used in a function, `()` indicates that the function it is in is only being used for side effects only
+  - doesn't return a value we need
+- `Box<dyn Error>`: (trait object) return a type that implements the `Error` trait, but doesn't specify the particular type the return value will be
+  - dyn is "dynamic"
+- _src/main.rs_: binary crate
+- _src/lib.rs_: library crate
 
-  **12.5 Working with Environment Variables**
+**12.4 Developing the Library's Functionality with Test Driven Development**
 
-  **12.6 Writing Error Messages to Standard Error Instead of Standard Output**
+**12.5 Working with Environment Variables**
+
+**12.6 Writing Error Messages to Standard Error Instead of Standard Output**
