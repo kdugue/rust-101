@@ -989,6 +989,28 @@ fn expensive_test() {
 
 **12.4 Developing the Library's Functionality with Test Driven Development**
 
+- data reference by a slice needs to be valid for the reference to be valid
+
 **12.5 Working with Environment Variables**
 
+- `to_lowercase` creates new data rather than referencing existing data
+- `env` standard library module: use when working with environment variables
+- use `is_err` over `unwrap`, `expect` when you don't care about the value
+
 **12.6 Writing Error Messages to Standard Error Instead of Standard Output**
+
+- two types of output:
+  - _standard output_: general info
+  - _standard error_: error info
+- `println!`: only capable of printing to standard output
+- `eprintln!`: for printing errors
+
+### Chapter 13 - Functional Language Features: Iterators and Closures
+
+**13.1 Closures: Anonymous Functions that Can Capture Their Environment**
+
+**13.2 Processing a Series of Items with iterators**
+
+**13.3 Improving Our I/O Project**
+
+**13.4 Comparing Performance: Loops vs Iterators**
