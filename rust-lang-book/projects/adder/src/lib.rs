@@ -1,3 +1,8 @@
+//! # Adder
+//!
+//! `adder` is a collection of utilities to make performing certain
+//! calculations more convenient.
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -55,4 +60,19 @@ impl Rectangle {
 
 pub fn add_two(a: i32) -> i32 {
     a + 2
+}
+
+/// Adds one to the number given.
+/// Adds one to the number given.
+///
+/// # Examples
+///
+/// ```
+/// let arg = 5;
+/// let answer = adder::add_one(arg);
+///
+/// assert_eq!(6, answer);
+/// ```
+pub fn add_one(x: i32) -> i32 {
+    x + 1
 }
