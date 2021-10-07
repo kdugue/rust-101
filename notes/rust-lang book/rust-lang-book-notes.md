@@ -242,9 +242,7 @@ fn  makes_copy(some_integer: i32) {// some_integer comes into scope
 
 - returning values can also transfer ownership; assigning a value to another variable moves it
 - when a variable that includes data on the heap goes out of scope, the value will be cleaned up by `drop` unless the data has been moved to be owned by another variable
--
-
-**4.2 References and Borrowing**
+- **4.2 References and Borrowing**
 
 - `&` = references, allow you to refer to some value without taking ownership of it
 - rules of references - at any given time, you can have _either_ one mutable reference _or_ any number of immutable references - references must always be valid
@@ -975,11 +973,9 @@ fn expensive_test() {
 - iterators produce a series of values,
   - `collect`: turns iterator into a collection that contains all elements
     - needs to have annotation because Rust isn't able to infer collection type
--
+- **12.2 Reading a File**
 
-**12.2 Reading a File**
-
-**12.3 Refactoring to Improve Modularity and Error Handling**
+  **12.3 Refactoring to Improve Modularity and Error Handling**
 
 - primitive obsession: anti pattern where using primitive values when a complex type would be more appropriate
 - `unwrap_or_else`: allows to define some custom, non-`panic!` error handling.
@@ -1018,6 +1014,7 @@ fn expensive_test() {
   - explicit type annotations on parameters and functions not required, because closures are usually short and relevant only within a narrow context rather tan in any arbitrary scenario
   - unlike function, can capture their environment and can access variables from the scope in which they're defined
 - when a closure captures a value from it's environment, it uses memory to store the values for use in the closure body
+-
 - closures can capture values from their environment in three ways, which directly map to the three ways a function can take a parameter: taking ownership , borrowing mutably, and borrowing immutably
   - associated traits:
     - `FnOnce`: taking ownership
@@ -1036,10 +1033,51 @@ let expensive_closure = |num| {
 ```
 
 - reason for using closure: defined the code to call at one point, store that code, and call it at a later point
--
+- **13.2 Processing a Series of Items with iterators**
 
-**13.2 Processing a Series of Items with iterators**
+- iterator
+  - responsible for the logic of iterating over each item and determining when the sequence has finished
+  - lazy: they have no effect until you call methods that consume the iterator to use it up
+
+```rust
+let v1 = vec![10, 20, 30];
+for val in v1_iter {
+	println!("val is {} ", val);
+}
+// will print
+// val is 10
+// val is 20
+// val is 30
+```
+
+- all iterators implement the `Iterator` trait (in standard library)
+- if using the `next` method from `Iterator`, the data structure you're calling it on must be mutable
+  - `next` method changes the internal state that the iterator uses to keep track of where it is in the sequence
+- methods that call `next` are called _consuming adaptors_, because calling them uses up the iterator
+- _iterator adaptors_: allow you to change iterators into different kinds of iterators
+- `collect`: consumes the iterator and collects the resulting values into a collection data type
+
+```rust
+let v1: Vec<i32> =vec![1, 2, 3];
+let v2: Vec<_> = v1.iter().map(|x| x + 1).collect();
+```
 
 **13.3 Improving Our I/O Project**
 
 **13.4 Comparing Performance: Loops vs Iterators**
+
+- iterators get compiled down to roughly the same code as if you'd written the lower-level code yourself
+- Iterators are one of Rust’s _zero-cost abstractions_, by which we mean using the abstraction imposes no additional runtime overhead.
+- _Unrolling_: optimization that removes the overhead of the loop controlling code and instead generates repetitive code for each iteration of the loop.
+
+### Chapter 14 - More About Cargo and Crates.io
+
+- **14.1 Customizing Builds with Release Profiles**
+
+**14.2 Publishing a Crate to Crates.io**
+
+**14.3 Cargo Workspaces**
+
+**14.4 Installing Binaries from Crates.io with cargo install**
+
+**14.5 Extending Cargo with Custom Commands**
