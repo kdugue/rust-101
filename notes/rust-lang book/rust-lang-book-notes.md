@@ -242,7 +242,8 @@ fn  makes_copy(some_integer: i32) {// some_integer comes into scope
 
 - returning values can also transfer ownership; assigning a value to another variable moves it
 - when a variable that includes data on the heap goes out of scope, the value will be cleaned up by `drop` unless the data has been moved to be owned by another variable
-- **4.2 References and Borrowing**
+
+**4.2 References and Borrowing**
 
 - `&` = references, allow you to refer to some value without taking ownership of it
 - rules of references - at any given time, you can have _either_ one mutable reference _or_ any number of immutable references - references must always be valid
@@ -973,9 +974,10 @@ fn expensive_test() {
 - iterators produce a series of values,
   - `collect`: turns iterator into a collection that contains all elements
     - needs to have annotation because Rust isn't able to infer collection type
-- **12.2 Reading a File**
 
-  **12.3 Refactoring to Improve Modularity and Error Handling**
+**12.2 Reading a File**
+
+**12.3 Refactoring to Improve Modularity and Error Handling**
 
 - primitive obsession: anti pattern where using primitive values when a complex type would be more appropriate
 - `unwrap_or_else`: allows to define some custom, non-`panic!` error handling.
@@ -1007,7 +1009,8 @@ fn expensive_test() {
 
 ### Chapter 13 - Functional Language Features: Iterators and Closures
 
-- **13.1 Closures: Anonymous Functions that Can Capture Their Environment**
+**13.1 Closures: Anonymous Functions that Can Capture Their Environment**
+
 - closure
   - anonymous function you can save in a variable or pass as arguments to other functions
   - can capture values from the scope in which they're defined
@@ -1033,7 +1036,8 @@ let expensive_closure = |num| {
 ```
 
 - reason for using closure: defined the code to call at one point, store that code, and call it at a later point
-- **13.2 Processing a Series of Items with iterators**
+
+**13.2 Processing a Series of Items with iterators**
 
 - iterator
   - responsible for the logic of iterating over each item and determining when the sequence has finished
@@ -1072,7 +1076,8 @@ let v2: Vec<_> = v1.iter().map(|x| x + 1).collect();
 
 ### Chapter 14 - More About Cargo and Crates.io
 
-- **14.1 Customizing Builds with Release Profiles**
+**14.1 Customizing Builds with Release Profiles**
+
 - two main profiles:
   - `dev` for development
   - `release` for release builds
@@ -1099,7 +1104,7 @@ let v2: Vec<_> = v1.iter().map(|x| x + 1).collect();
 
 ### Chapter 15 - Smart Pointers
 
-- **15.1 Using `Box<T>` to Point to Data on the Heap**
+**15.1 Using `Box<T>` to Point to Data on the Heap**
 
 **15.2 Treating Smart Pointers Like Regular References with the Deref Trait**
 
