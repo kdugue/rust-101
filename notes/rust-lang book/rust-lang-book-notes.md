@@ -1073,11 +1073,40 @@ let v2: Vec<_> = v1.iter().map(|x| x + 1).collect();
 ### Chapter 14 - More About Cargo and Crates.io
 
 - **14.1 Customizing Builds with Release Profiles**
+- two main profiles:
+  - `dev` for development
+  - `release` for release builds
 
 **14.2 Publishing a Crate to Crates.io**
 
+- crate registry at crates.io distributes source code for packages
+- documentation comments use 3 slashes `///`
+- `cargo doc --open`: build the HTML for crate's documentation and documentation for crate's dependencies
+- tests are also performed on documentation examples
+- re-exporting takes a public item in one location and makes it public in another location, as if it were defined in the other location instead
+
 **14.3 Cargo Workspaces**
+
+- workspaces: set of packages that share the same _Cargo.lock_ and output directory
 
 **14.4 Installing Binaries from Crates.io with cargo install**
 
+- `cargo install`: install and use binary crates locally
+- only packages with binary targets can be installed
+  - binary target: runnable program that is created if the crates has a _src/main.rs_ file or another file specified as binary
+
 **14.5 Extending Cargo with Custom Commands**
+
+### Chapter 15 - Smart Pointers
+
+- **15.1 Using `Box<T>` to Point to Data on the Heap**
+
+**15.2 Treating Smart Pointers Like Regular References with the Deref Trait**
+
+**15.3 Running Code on Cleanup with the Drop Trait **
+
+**15.4 `Rc<T>`, the Reference Counted Smart Pointer**
+
+**15.5 `RefCell<T>` and the Interior Mutability Pattern**
+
+**15.6 Reference Cycles Can Leak Memory**
