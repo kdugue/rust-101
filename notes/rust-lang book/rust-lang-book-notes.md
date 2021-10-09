@@ -1104,9 +1104,59 @@ let v2: Vec<_> = v1.iter().map(|x| x + 1).collect();
 
 ### Chapter 15 - Smart Pointers
 
+- pointer: variable that contains an address in memory
+- Rust's version of a pointer is a reference
+- smart pointers: pointer + additional metadata and capabilities
+  - examples: `String`, `Vec<T>`
+  - usually implemented with structs
+  - implement `Drefer` and `Drop` traits
+    - `Deref`: allows an instance of the smart pointer struct to behave like a reference so you can write code that works with either references or smart pointers
+    - `Drop`: allows you to customize the code that is run when an instance of the smart pointer goes out of scope
+
 **15.1 Using `Box<T>` to Point to Data on the Heap**
 
+- Boxes allow for storage on the heap rather than the stack
+
+```rust
+fn main() {
+	let b = Box::new(5);
+	println!("b = {}", b);
+
+	// value of 5 is allocated to the heap
+}
+```
+
+- at compile type, Rust needs to know how much a space a type takes up
+- pointer's size doesn't change based on the amount of data it's pointing to
+- indirection: instead of storing a value directly, we'll change the data structure to store the value indirectly by storing a pointer to the value instead
+- Boxes solely provide indirection and heap allocation
+
 **15.2 Treating Smart Pointers Like Regular References with the Deref Trait**
+
+- `*` dereference operator:
+- reference: "arrow to a value stored somewhere else"
+
+```rust
+fn main() {
+	let x = 5;
+	let y = &x; // with Box, can also written as let y = Box::nex(x);
+
+	assert_eq!(5, x);
+	assert_eq!(5, *y);
+
+	// we have to use * because comparing a number (5) to a reference to a number isn't
+	// allowed because they're different type. Dereference operator (*) is used to
+	// follow the reference to the value it's pointing to
+}
+```
+
+- `Deref` trait has to be used to enable dereferencing
+- in order to implement a trait, trait's required methods must be declared
+- deref coercion: converts a type into a reference to another type
+  - EX: it can convert `&String` to `&str` because `String` implements the `Deref` trait such that it returns `&str`
+  - happens automatically when we pass a reference to a particular type’s value as an argument to a function or method that doesn’t match the parameter type in the function or method definition
+- mutable references have the ability to be coerced to immutable references
+- immutable references can never coerce to mutable references
 
 **15.3 Running Code on Cleanup with the Drop Trait **
 
