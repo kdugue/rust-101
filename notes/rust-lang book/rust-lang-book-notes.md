@@ -1160,6 +1160,13 @@ fn main() {
 
 **15.3 Running Code on Cleanup with the Drop Trait **
 
+- `Drop` trait: let's you customize what happens when a value is about to go out of scope
+  - mostly used when implementing a smart pointer
+- variables are dropped in the reverse order of their creations
+- destructor: function that cleans up an instance (ex: `Drop` trait)
+- constructor: function that creates an instance
+- to force a value to be cleaned up early, you can use `std::mem::drop` function
+
 **15.4 `Rc<T>`, the Reference Counted Smart Pointer**
 
 **15.5 `RefCell<T>` and the Interior Mutability Pattern**
