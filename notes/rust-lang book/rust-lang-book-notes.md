@@ -1169,6 +1169,18 @@ fn main() {
 
 **15.4 `Rc<T>`, the Reference Counted Smart Pointer**
 
+- `Rc<T>`: reference counting
+  - keeps track of the number of reference to a value to determine whether or not the value is still in use; if there are zero references to a value, the value can be cleaned up without any references becoming invalid
+  - only for single-threaded scenarios
+  - allows a single value to have multiple owners, and the count ensures that the value remains valid as long as any of the owners still exist
+
 **15.5 `RefCell<T>` and the Interior Mutability Pattern**
 
+- interior mutability: mutating the value inside an immutable value
+- `RefCell<T>`: represents single ownership over the data it holds
+  - borrowing running are enforced at runtime
+  - only for use in single-threaded scenarios (gives a compile time error if used in a multi-threaded scenario)
+
 **15.6 Reference Cycles Can Leak Memory**
+
+- memory leak: memory that is never cleaned up
