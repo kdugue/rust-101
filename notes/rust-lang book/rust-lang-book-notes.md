@@ -1184,3 +1184,45 @@ fn main() {
 **15.6 Reference Cycles Can Leak Memory**
 
 - memory leak: memory that is never cleaned up
+
+### Chapter 16 - Fearless Concurrency
+
+- concurrent programming: different parts of a program execute independently
+- parallel programing: different parts of a program execute at the same time
+
+**16.1 Using Threads to Run Code Simultaneously**
+
+- create new thread via `thread::spawn`
+
+```rust
+use std::thread;
+use std::time::Duration;
+
+fn main() {
+	thread::spawn(|| {
+		for i in 1..10 {
+			println!("hi number {} from the spawned thread!", i);
+			thread::sleep(Duration::from_millis(1));
+		}
+	});
+
+	for i in 1..5 {
+		println!("hi number {} from the main thread!", i);
+		thread::sleep(Duration::from_millis(1));
+	}
+}
+```
+
+- blocking a thread: thread is prevented from performing work or exiting
+
+**16.2 Using Message Passing to Transfer Data Between Threads**
+
+- message passing: threads/actors communicate by sending each other messages containing data
+- channel consists of a transmitter and receiver
+  - transmitter: called with data you want to send
+  - receiver: checks for arriving messages
+- `mpsc`: multiple producer, single consumer
+
+**16.3 Shared-State Concurrency**
+
+**16.4 Extensible Concurrency with the Sync and Send Traits**
