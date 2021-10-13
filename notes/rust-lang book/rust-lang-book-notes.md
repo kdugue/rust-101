@@ -1225,4 +1225,17 @@ fn main() {
 
 **16.3 Shared-State Concurrency**
 
+- shared memory concurrency
+  - multiple threads can access the same memory location at the same time
+- mutex
+  - mutual exclusion
+  - allows only one thread to access some data at a given time
+  -
+
 **16.4 Extensible Concurrency with the Sync and Send Traits**
+
+### Chapter 17 - Object Oriented Programming Features of Rust
+
+**17.1 Characteristics of Object-Oriented Languages**
+**17.2 Using Trait Objects That Allow for Values of Different Types**
+**17.3 Implementing an Object-Oriented Design Pattern**
