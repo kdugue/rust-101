@@ -1237,5 +1237,27 @@ fn main() {
 ### Chapter 17 - Object Oriented Programming Features of Rust
 
 **17.1 Characteristics of Object-Oriented Languages**
-**17.2 Using Trait Objects That Allow for Values of Different Types**
+
+- object oriented programming (OOP)
+  - made up of objects
+  - object packages both data and the procedures (methods) that operate on that data
+- `impl` blocks provide methods on structs and enums
+- encapsulation: implementation details of an object aren't accessible to code using that object; only way to interact with that object is through the public interface
+- Rust's OOP-like features:
+  - encapsulation: option to use `pub` or not for different parts of code enables encapsulation of implementation details
+- inheritance: object inherits from another object's definition, gaining the parent object's data and behavior without have to define them again
+- no inheritance in Rust; no way to define a struct that inherits the parent struct's fields and method implementations
+- instead of inheritance, Rust uses trait objects to enable polymorphism
+- **17.2 Using Trait Objects That Allow for Values of Different Types**
+  Trait objects - points to both an instance of a type implementing our specified trait as well as a table used to look up trait methods on that type at runtime - can't contain data - allows for abstraction across common behavior
+
+```rust
+// trait example
+
+pub trait Draw {
+	fn draw(&self);
+}
+
+```
+
 **17.3 Implementing an Object-Oriented Design Pattern**
