@@ -1248,8 +1248,9 @@ fn main() {
 - inheritance: object inherits from another object's definition, gaining the parent object's data and behavior without have to define them again
 - no inheritance in Rust; no way to define a struct that inherits the parent struct's fields and method implementations
 - instead of inheritance, Rust uses trait objects to enable polymorphism
-- **17.2 Using Trait Objects That Allow for Values of Different Types**
-  Trait objects - points to both an instance of a type implementing our specified trait as well as a table used to look up trait methods on that type at runtime - can't contain data - allows for abstraction across common behavior
+
+**17.2 Using Trait Objects That Allow for Values of Different Types**
+Trait objects - points to both an instance of a type implementing our specified trait as well as a table used to look up trait methods on that type at runtime - can't contain data - allows for abstraction across common behavior
 
 ```rust
 // trait example
@@ -1257,7 +1258,136 @@ fn main() {
 pub trait Draw {
 	fn draw(&self);
 }
-
 ```
 
 **17.3 Implementing an Object-Oriented Design Pattern**
+
+- unpopulated fields in structs are not allowed
+
+### Chapter 18 - Patterns and Matching
+
+**18.1 All the Places Patterns Can Be Used**
+
+- `match` expressions have to be exhaustive: all possibilities for the value in the `match` expression must be accounted for
+- downside of using `if let`: compiler doesn't check for exhaustiveness (unlike for `match`)
+
+```rust
+// for loop example
+let v = vec!['a', 'b', 'c'];
+
+for (index, value) in v.iter().enumerate() {
+	println!("{} is at index {}", value, index);
+}
+
+```
+
+**18.2 Refutability: Whether a Pattern Might Fail to Match**
+
+- patterns come in 2 forms:
+  - irrefutable: patterns that match any possible value
+    - example: `let x = 5;`
+  - refutable: patterns that can fail to match for some possible values
+    - example: `if let Some(x) = a_value`
+- match arms must use refutable patterns, except for the last arm, which should match any remaining values with an irrefutable pattern
+
+**18.3 Pattern Syntax**
+
+- match multiple patterns with `|`
+
+```rust
+let x = 1;
+
+match x {
+	1 | 2 => println!("one or two"),
+	3 => println!("three"),
+	_ => println!("anything"),
+}
+
+// prints one or two
+```
+
+- `..=`: inclusive range of values
+
+```rust
+let x = 5;
+
+match x {
+	1..=5 => println!("one through five"),
+	_ => println!("something else"),
+}
+
+// prints one through five
+```
+
+- ignore values with `_`
+
+```rust
+fn foo(_: i32, y: i32) {
+	println!("The code only uses the y parameter: {}", y);
+}
+
+fn main() {
+	foo(3,4);
+}
+```
+
+- `_` vs `_foo` (name starting with an underscore
+
+```rust
+let s = String::from("Hello!");
+
+//(a)
+if let Some(_s) = s {
+	println!("found a string");
+}
+
+// (b)
+if let Some(_) = s {
+	println!("found a string")
+}
+
+println!("{:?}", s);
+
+// using block (a) we'll get an error because the s value
+// will still be moved into _s, which prevents us from using s again
+
+// using block (b) will not cause any errors because we never bind s
+// to anything; it isn't moved
+```
+
+- `..` pattern: ignores any parts of a value that we haven't explicitly matched in the rest of the pattern
+
+```rust
+fn main() {
+	let numbers = (2, 4, 8, 16, 32);
+
+	match numbers {
+		(first, ..., last) => {
+			println!("Some numbers: {} {}", first, last);
+		}
+	}
+}
+```
+
+- `@`: test a value and save it in a variable within one pattern
+
+```rust
+enum Message {
+	Hello { id: i32 }
+}
+
+let msg = Message::Hello {id: 5};
+
+match msg {
+	Message::Hello {
+		id: id_variable @ 3..=7,
+	} => println!("Found an id in range: {}", id_variable),
+	Message::Hello {id: 10..=12} => {
+		println!("Found an id in another range")
+	}
+	Message::Hello {id} => println!("Found some other id: {}", id),
+}
+
+// prints Found an id in range: 5
+// able to save value of variable in id_variable
+```
