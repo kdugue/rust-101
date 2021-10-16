@@ -1419,5 +1419,27 @@ fn bar() => ! {
 - diverging functions: functions that return never
 - dynamically sized types: values whose size is only known at runtime
 - slice data structure stores the starting position and the length of the slice
-  **19.4 Advanced Functions and Closures**
+
+**19.4 Advanced Functions and Closures**
+
+- able to pass regular functions to functions
+- `fn`: function pointer
+
+```rust
+fn add_one(x: i32) -> i32 {
+	x + 1
+}
+
+fn do_twice(f: fn(i32) -> i32, arg: i32) -> i32 {
+	f(arg) + f(arg)
+}
+
+fn main() {
+	let answer = do_twice(add_one, 5);
+	println!("The answer is: {}", answer);
+}
+```
+
+- closures are represented by traits; you can't return closures directly
+
   **19.5 Macros**
