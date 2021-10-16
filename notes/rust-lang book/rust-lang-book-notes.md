@@ -1395,6 +1395,15 @@ match msg {
 ### Chapter 19 - Advanced Features
 
 **19.1 Unsafe Rust**
+
+- unsafe rust: version of rust that doesn't enforce memory safety guarantees
+- 5 things you can do in unsafe rust
+  1.  dereference a raw pointer
+  2.  call an unsafe function or method
+  3.  access or modify a mutable static variable
+  4.  implement an unsafe trait
+  5.  access fields of `union` S
+
 **19.2 Advanced Traits**
 **19.3 Advanced Types**
 **19.4 Advanced Functions and Closures**
