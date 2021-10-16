@@ -1442,4 +1442,6 @@ fn main() {
 
 - closures are represented by traits; you can't return closures directly
 
-  **19.5 Macros**
+**19.5 Macros**
+
+- metaprogramming: a way of writing code that writes other code
