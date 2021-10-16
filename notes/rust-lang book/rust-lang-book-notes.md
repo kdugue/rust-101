@@ -1405,6 +1405,19 @@ match msg {
   5.  access fields of `union` S
 
 **19.2 Advanced Traits**
+
 **19.3 Advanced Types**
-**19.4 Advanced Functions and Closures**
-**19.5 Macros**
+
+- `!` (never type): denotes function that will never return
+
+```rust
+fn bar() => ! {
+	// code here
+}
+```
+
+- diverging functions: functions that return never
+- dynamically sized types: values whose size is only known at runtime
+- slice data structure stores the starting position and the length of the slice
+  **19.4 Advanced Functions and Closures**
+  **19.5 Macros**
