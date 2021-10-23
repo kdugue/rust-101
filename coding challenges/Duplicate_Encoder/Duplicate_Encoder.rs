@@ -1,6 +1,7 @@
 // My solution
 fn duplicate_encode(word: &str) -> String {
     use std::collections::HashMap;
+
     let lower_case = word.to_lowercase();
     let mut map = HashMap::new();
     let mut result = String::new();
