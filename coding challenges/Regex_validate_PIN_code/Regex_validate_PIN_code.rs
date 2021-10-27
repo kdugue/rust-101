@@ -10,3 +10,5 @@ fn validate_pin(pin: &str) -> bool {
 
     count == 4 || count == 6
 }
+
+// TODO: add alternate solution
