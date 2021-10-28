@@ -3,9 +3,7 @@ fn abbrev_name(name: &str) -> String {
     let mut split = name.split_whitespace();
     let mut first_name = String::new();
     let mut last_name = String::new();
-
     let mut result = String::new();
-
     let mut count = 0;
 
     for word in split {
