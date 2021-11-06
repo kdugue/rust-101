@@ -1,6 +1,6 @@
 ## String ends with?
 
-Link: https://www.codewars.com/kata/51f2d1cafc9c0f745c00037d/rust
+[Link](https://www.codewars.com/kata/51f2d1cafc9c0f745c00037d/rust)
 
 Complete the solution so that it returns true if the first argument(string) passed in ends with the 2nd argument (also a string).
 
