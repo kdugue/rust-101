@@ -4,7 +4,7 @@
 
 - Cargo: package manager and build tool
 - Rustfmt: formatter
-- zero-cost abstractions:
+- zero-cost abstractions: you can write human-friendly high level code and the compiler will give you for free performance at least as good as any optimized low level code you could have written yourself
 
 ### Chapter 1 - Getting Started
 
