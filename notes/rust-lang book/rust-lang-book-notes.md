@@ -42,7 +42,7 @@ let  mut  guess = String::new();
   - references give a way to let multiple parts of your code access one piece of data without needing to copy that data into memory multiple times
   - references are immutable by default
 - enumerations: types that can have a fixed set of values; each value is called a variant
-- crate: collection of Rust source code files
+- crate: collection of rust source code files
   - binary crate: executable file
   - library crate: contains code intended to be used in other programs
 - crates.io: rust devs post their open source projects for others to use
