@@ -25,8 +25,8 @@
 - variables are immutable by default
 
 ```rust
-let applesCount = 5; //immutable
-let mut bananasCount = 5; //mutable
+let applesCount = 5; // immutable
+let mut bananasCount = 5; // mutable
 ```
 
 - associated functions are implemented on a type
