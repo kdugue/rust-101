@@ -464,7 +464,6 @@ fn simulate_game<'a>(home: &'a str, away: &'a str) -> &'a str {
 - lifetime parameters are not prescriptive
   - don't order code to behave a certain way
   - don't change concrete lifetimes
-  - (add more here)
 
 ### Module 8: Lifetime Elision
 
