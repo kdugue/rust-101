@@ -536,7 +536,7 @@ if let Some(3) = some_u8_value {
 
 - crate: binary or library
 - package: one or more crates that provides a set of functionality
-  - contains a `Cargo.toml` file that describes how to build those crates
+  - contains a `Cargo.toml` (file that describes how to build those crates)
   - can contain at most one library crate
   - can contain as many binary crates as you'd like
 - package that only contains `src/main.rs`: only contains binary crate
