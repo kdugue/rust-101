@@ -700,7 +700,6 @@ let s3 = String::from("toe");
 let s = format!("{}-{}-{}", s1, s2, s3);
 // format is another way to format a string
 // format! macro returns a 'String' with its contents
-
 ```
 
 **8.3 Storing Keys with Associated Values in Hash Maps**
