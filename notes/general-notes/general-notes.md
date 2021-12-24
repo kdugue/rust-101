@@ -7,3 +7,4 @@
   3. owner cannot free or mutate the resource while it is borrowed
 
 - when passing data between threads, Rust will to make sure the data is thread-safe to use
+  - thread-safe: method or class instance can be used by multiple threads at the same time without any problems occurring
